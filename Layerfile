@@ -1,11 +1,15 @@
+#Use an Ubuntu 18.04 base for our staging server
 FROM vm/ubuntu:18.04
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-RUN sudo npm install npm@latest -g
+# To note: Layerfiles create entire VMs, *not* containers!
+
+# Install python
+RUN apt-get update && apt-get install python3 && apt-get install python3-pip
+
 
 
 COPY . .
-RUN npm install
-RUN BACKGROUND node index.js
-EXPOSE WEBSITE http://localhost:3000
+RUN pip3 install -r reqs.txt
+
+RUN BACKGROUND python3 main.py
+EXPOSE WEBSITE http://localhost:5000
