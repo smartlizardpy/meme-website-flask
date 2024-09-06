@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "mainpy"]
+CMD ["python", "main.py"]
 
